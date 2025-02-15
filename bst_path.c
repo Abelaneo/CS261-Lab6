@@ -16,14 +16,54 @@ struct TreeNode {
 
 int shortestPath(struct TreeNode* root)
 {
-  /*  COMPLETE  */
-  return -2;
+  if (root == NULL) {
+	return -1;
+  }
+
+  struct TreeNode* left = root->left; 
+  struct TreeNode* right = root->right;
+  
+  if (left == NULL && right == NULL) {
+	return 0;
+  } else if (left == NULL) {
+	return shortestPath(right) + 1;
+  } else if (right == NULL) {
+	return shortestPath(left) + 1;
+  } else {
+	int shortleft = 1 + shortestPath(left);
+	int shortright = 1 + shortestPath(right);
+	if (shortleft > shortright) {
+		return shortright;
+	} else {
+		return shortleft;
+	}
+  }
 }
 
 int longestPath(struct TreeNode* root)
 {
-   /*  COMPLETE  */
-   return -2;
+  if (root == NULL) {
+	return -1;
+  }
+
+  struct TreeNode* left = root->left; 
+  struct TreeNode* right = root->right;
+  
+  if (left == NULL && right == NULL) {
+	return 0;
+  } else if (left == NULL) {
+	return longestPath(right) + 1;
+  } else if (right == NULL) {
+	return longestPath(left) + 1;
+  } else {
+	int longleft = 1 + longestPath(left);
+	int longright = 1 + longestPath(right);
+	if (longleft < longright) {
+		return longright;
+	} else {
+		return longleft;
+	}
+  }
 }
 
 struct TreeNode* newNode(int val){
